@@ -372,12 +372,12 @@ loginForm.addEventListener("submit", e=>{
     if(user.role === "teacher"){
 
         window.location.href =
-            "Teacher.html";
+            "teacher.html";
 
     }else{
 
         window.location.href =
-            "Student.html";
+            "student.html";
 
     }
 
