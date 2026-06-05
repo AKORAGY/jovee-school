@@ -552,51 +552,45 @@ function loadAdminUsers() {
 
     getUsers().forEach(user => {
 
-        if(user.role === "teacher"){
+        const li =
+            document.createElement("li");
 
-            const li =
-                document.createElement("li");
+        if (user.role === "teacher") {
 
-          li.innerHTML = `
-    <strong>${user.name}</strong><br>
-    ${user.email}<br><br>
+            li.innerHTML = `
+                <strong>${user.name}</strong><br>
+                ${user.email}<br><br>
 
-    <button
-        class="red"
-        onclick="deleteUser(${user.id})">
+                <button
+                    class="red"
+                    onclick="deleteUser(${user.id})">
+                    Delete
+                </button>
+            `;
 
-        Delete
-
-    </button>
-`;
-
+            teacherList.appendChild(li);
         }
 
-        if(user.role === "student"){
+        if (user.role === "student") {
 
-            const li =
-                document.createElement("li");
+            li.innerHTML = `
+                <strong>${user.name}</strong><br>
+                ${user.email}<br>
+                Class: ${user.class || "N/A"}<br><br>
 
-           li.innerHTML = `
-    <strong>${user.name}</strong><br>
-    ${user.email}<br>
-    Class: ${user.class || "N/A"}<br><br>
+                <button
+                    class="red"
+                    onclick="deleteUser(${user.id})">
+                    Delete
+                </button>
+            `;
 
-    <button
-        class="red"
-        onclick="deleteUser(${user.id})">
-
-        Delete
-
-    </button>
-`;
-
+            studentList.appendChild(li);
         }
 
     });
 
 }
-
 function loadStats() {
 
     const users =
