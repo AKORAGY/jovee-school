@@ -557,12 +557,18 @@ function loadAdminUsers() {
             const li =
                 document.createElement("li");
 
-            li.innerHTML = `
-                <strong>${user.name}</strong><br>
-                ${user.email}
-            `;
+          li.innerHTML = `
+    <strong>${user.name}</strong><br>
+    ${user.email}<br><br>
 
-            teacherList.appendChild(li);
+    <button
+        class="red"
+        onclick="deleteUser(${user.id})">
+
+        Delete
+
+    </button>
+`;
 
         }
 
@@ -571,12 +577,19 @@ function loadAdminUsers() {
             const li =
                 document.createElement("li");
 
-            li.innerHTML = `
-                <strong>${user.name}</strong><br>
-                ${user.email}
-            `;
+           li.innerHTML = `
+    <strong>${user.name}</strong><br>
+    ${user.email}<br>
+    Class: ${user.class || "N/A"}<br><br>
 
-            studentList.appendChild(li);
+    <button
+        class="red"
+        onclick="deleteUser(${user.id})">
+
+        Delete
+
+    </button>
+`;
 
         }
 
