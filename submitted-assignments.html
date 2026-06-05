@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submitted Assignments</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<header>
+    <h2>Submitted Assignments</h2>
+</header>
+
+<div class="card">
+
+    <ul id="submittedList"></ul>
+
+    <br>
+
+    <button onclick="history.back()">
+        Back
+    </button>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const submittedList =
+        document.getElementById("submittedList");
+
+    const users = getUsers();
+
+    submittedList.innerHTML = "";
+
+    users
+    .filter(u => u.role === "student")
+    .forEach(student => {
+
+        (student.assignments || []).forEach(a => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "assignment-card";
+
+            card.innerHTML = `
+                <h4>${a.fileName}</h4>
+
+                <p>
+                    Student:
+                    ${student.name}
+                </p>
+
+                <p>
+                    Submitted:
+                    ${a.date}
+                </p>
+
+                <a
+                    href="${a.fileData}"
+                    target="_blank"
+                    class="green"
+                >
+                    Open
+                </a>
+
+                <a
+                    href="${a.fileData}"
+                    download="${a.fileName}"
+                    class="blue"
+                >
+                    Download
+                </a>
+
+                <button
+                    class="red"
+                    onclick="deleteSubmission(
+                        '${student.email}',
+                        ${a.id}
+                    )"
+                >
+                    Delete
+                </button>
+            `;
+
+            submittedList.appendChild(card);
+
+        });
+
+    });
+
+});
+
+function deleteSubmission(email, assignmentId) {
+
+    if (!confirm("Delete assignment?"))
+        return;
+
+    const users = getUsers();
+
+    const student =
+        users.find(u => u.email === email);
+
+    if (!student) return;
+
+    student.assignments =
+        (student.assignments || [])
+        .filter(a => a.id !== assignmentId);
+
+    saveUsers(users);
+
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>

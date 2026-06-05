@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-box">
+        <h2>JOVE E-SCHOOL</h2>
+
+        <div class="progress-bar">
+            <div id="progress"></div>
+        </div>
+
+        <p id="percent">0%</p>
+    </div>
+</div>
+
+<header>
+    <h2>📥 Notifications</h2>
+</header>
+
+<div class="card">
+
+    <h3>My Notifications</h3>
+
+    <div id="notificationList">
+        Loading notifications...
+    </div>
+
+</div>
+
+<br>
+
+<button
+    class="green"
+    onclick="history.back()">
+    ← Back
+</button>
+
+<script src="app.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container =
+        document.getElementById(
+            "notificationList"
+        );
+
+    if (!container) return;
+
+    const user =
+        getCurrentUser?.();
+
+    if (!user) {
+
+        container.innerHTML =
+            "<p>No logged in user.</p>";
+
+        return;
+    }
+
+    const messages =
+        JSON.parse(
+            localStorage.getItem("messages")
+            || "[]"
+        );
+
+    const myNotifications =
+        messages.filter(
+            msg =>
+                msg.toRole ===
+                user.role
+        );
+
+    container.innerHTML = "";
+
+    if (
+        myNotifications.length === 0
+    ) {
+
+        container.innerHTML =
+            "<p>No notifications available.</p>";
+
+        return;
+    }
+
+    myNotifications
+        .reverse()
+        .forEach(msg => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "notification-card";
+
+            card.innerHTML = `
+
+                <h3>
+                    📩 ${msg.from}
+                </h3>
+
+                <p>
+                    ${msg.text}
+                </p>
+
+                <small>
+                    ${msg.date}
+                </small>
+
+                <br><br>
+
+                <button
+                    class="red"
+                    onclick="deleteNotification(${msg.id})">
+                    Delete
+                </button>
+
+                <hr>
+
+            `;
+
+            container.appendChild(
+                card
+            );
+        });
+
+});
+
+function deleteNotification(id) {
+
+    if (
+        !confirm(
+            "Delete notification?"
+        )
+    ) return;
+
+    let messages =
+        JSON.parse(
+            localStorage.getItem(
+                "messages"
+            ) || "[]"
+        );
+
+    messages =
+        messages.filter(
+            msg =>
+                msg.id !== id
+        );
+
+    localStorage.setItem(
+        "messages",
+        JSON.stringify(messages)
+    );
+
+    location.reload();
+}
+
+</script>
+
+</body>
+</html>

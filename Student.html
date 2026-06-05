@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+    <div id="loader">
+  <div class="loader-box">
+    <h2>JOVE E-SCHOOL: STUDENTS PORTAL</h2>
+    <div class="progress-bar">
+      <div id="progress"></div>
+    </div>
+    <p id="percent">0%</p>
+  </div>
+</div>
+
+<header>
+<h2>Student Dashboard</h2>
+</header>
+
+<h2 id="welcome"></h2>
+
+<section class="maincard">
+
+    <div class="card">
+
+        <button onclick="showAssignments()">
+            📝 Assignments
+        </button>
+
+        <button onclick="showLibrary()">
+            📚 Library
+        </button>
+
+        <button onclick="showVideos()">
+            🎥 Video Lessons
+        </button>
+
+        <button onclick="showResults()">
+            📊 Results
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>📝 Upload Assignment</h3>
+
+        <label for="assignmentFile">
+            Select Assignment File
+        </label>
+
+        <input
+            type="file"
+            id="assignmentFile">
+
+        <button onclick="uploadAssignment()">
+            Upload
+        </button>
+
+    </div>
+
+</section>
+
+ <!-- ==========================
+    SETTINGS
+    ========================== -->
+  <section class="settings">
+
+
+<div class="settings-panel">
+
+    <button
+        class="settings-btn"
+        onclick="toggleSettings()">
+
+    ⚙️
+
+    </button>
+
+    <div
+        id="settingsDropdown"
+        class="settings-dropdown">
+
+        <button onclick="showAccount()">
+            👤 My Account
+        </button>
+
+        <button onclick="showNotifications()">
+    📥 Notifications
+    <span id="notifyCount"></span>
+</button>
+
+<button onclick="showMessages()">
+    📨 Send Message
+</button>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- ACCOUNT MODAL -->
+
+<div
+    id="accountModal"
+    class="modal">
+
+
+<div class="modal-content">
+
+    <h2>My Account</h2>
+
+    <label>
+        Full Name
+    </label>
+
+    <input
+        type="text"
+        id="accountName"
+        readonly>
+
+    <label>
+        Email
+    </label>
+
+    <input
+        type="email"
+        id="accountEmail"
+        readonly>
+
+    <label>
+        Role
+    </label>
+
+    <input
+        type="text"
+        id="accountRole"
+        readonly>
+
+    <div class="account-buttons">
+
+        <button
+            id="editBtn"
+            class="blue"
+            onclick="enableEdit()">
+
+            Edit
+
+        </button>
+
+        <button
+            id="saveBtn"
+            class="green"
+            style="display:none;"
+            onclick="saveAccount()">
+
+            Save
+
+        </button>
+
+        <button
+            class="red"
+            onclick="closeAccount()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

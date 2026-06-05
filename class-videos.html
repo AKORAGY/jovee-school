@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Videos</title>
+<link rel="stylesheet" href="st.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎥 My Class Videos</h2>
+</header>
+
+<div class="card">
+
+    <div id="videoList" class="video-grid"></div>
+
+</div>
+
+<button class="green" onclick="history.back()">
+    ← Back
+</button>
+
+<script src="app.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container =
+        document.getElementById("videoList");
+
+    if (!container) return;
+
+    const user = getCurrentUser();
+
+if (!user) {
+    window.location.href = "login.html";
+    return;
+}
+
+if (!user.class) {
+
+    const videos = getVideos();
+
+    const myVideos =
+        videos.filter(
+            v => v.class === user.class
+        );
+
+    if (myVideos.length === 0) {
+
+        container.innerHTML =
+            "<p>No videos available.</p>";
+
+        return;
+    }
+
+    myVideos.forEach((video, index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "video-card";
+
+        card.innerHTML = `
+
+            <h3>📚 ${video.class}</h3>
+
+            <p>
+                📅 ${video.date}
+            </p>
+
+            <p>
+                ⏱️ ${video.duration || 0}
+                seconds
+            </p>
+
+            <video
+                controls
+                width="100%"
+                src="${video.video}">
+            </video>
+
+            <br><br>
+
+            <a
+                href="${video.video}"
+                download="lesson-${index}.webm"
+                class="green"
+            >
+                ⬇ Download
+            </a>
+
+        `;
+
+        container.appendChild(card);
+    });
+
+});
+
+</script>
+
+</body>
+</html>

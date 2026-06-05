@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+ <div id="loader">
+  <div class="loader-box">
+    <h2>JOVE E-SCHOOL: REGISTER</h2>
+    <div class="progress-bar">
+      <div id="progress"></div>
+    </div>
+    <p id="percent">0%</p>
+  </div>
+</div>
+
+
+<div class="card">
+<h2>Register</h2>
+
+<form id="registerForm">
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required
+    >
+
+    <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        required
+    >
+
+    <label for="role">Role</label>
+    <select id="role" required>
+        <option value="">Select Role</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+    </select>
+
+    <!-- STUDENT ONLY -->
+    <div id="classField" class="hidden">
+        <input
+            type="text"
+            id="studentClass"
+            placeholder="Class"
+        >
+    </div>
+
+    <!-- TEACHER ONLY -->
+    <div id="contactField" class="hidden">
+        <input
+            type="tel"
+            id="contact"
+            placeholder="Contact Number"
+        >
+    </div>
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="code"
+            placeholder="Security Code"
+            required
+        >
+
+        <button
+            type="button"
+            onclick="toggleCode()">
+            View
+        </button>
+
+    </div>
+
+    <button type="submit" class="green">
+        Register
+    </button>
+
+</form>
+<p>
+  <a href="index.html" >← back</a>
+</p>
+
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

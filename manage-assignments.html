@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Assignments</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<header>
+    <h2>📚 Manage Assignments</h2>
+</header>
+
+<div class="card">
+
+    <h3>Create New Assignment</h3>
+
+    <!-- CLASS -->
+    <label for="assignmentClass">
+        Class
+    </label>
+
+    <select id="assignmentClass">
+        <option value="">
+            Select Class
+        </option>
+    </select>
+
+    <!-- TITLE -->
+    <label for="assignmentTitle">
+        Assignment Title
+    </label>
+
+    <input
+        type="text"
+        id="assignmentTitle"
+        placeholder="Assignment Title">
+
+    <!-- SUBJECT -->
+    <label for="assignmentSubject">
+        Subject
+    </label>
+
+    <input
+        type="text"
+        id="assignmentSubject"
+        placeholder="Subject">
+
+    <!-- DESCRIPTION -->
+    <label for="assignmentDescription">
+        Description
+    </label>
+
+    <textarea
+        id="assignmentDescription"
+        rows="4"
+        placeholder="Assignment Description">
+    </textarea>
+
+    <label for="assignmentFile">
+    Assignment File
+</label>
+
+<input
+    type="file"
+    id="assignmentFile">
+
+    <!-- DUE DATE -->
+    <label for="assignmentDueDate">
+        Due Date
+    </label>
+
+    <input
+        type="date"
+        id="assignmentDueDate">
+
+    <button
+        class="green"
+        onclick="createAssignment()">
+        Create Assignment
+    </button>
+
+    <hr>
+
+    <h3>
+        Existing Assignments
+        (<span id="assignmentCount">0</span>)
+    </h3>
+
+    <ul id="assignmentManagerList"></ul>
+
+    <br>
+
+    <button
+        class="blue"
+        onclick="window.location.href='teacher.html'">
+        ← Back to Dashboard
+    </button>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadAssignments();
+
+        loadClassDropdown();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

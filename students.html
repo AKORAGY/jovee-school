@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Students</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<header>
+    <h2>Students</h2>
+</header>
+
+<div class="card">
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search Students">
+
+    <button onclick="searchStudents()">
+        Search
+    </button>
+
+    <hr>
+
+    <ul id="studentList"></ul>
+
+    <br>
+
+    <button onclick="history.back()">
+        Back
+    </button>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+function loadStudents() {
+
+    const studentList =
+        document.getElementById("studentList");
+
+    const users =
+        getUsers();
+
+    studentList.innerHTML = "";
+
+    users
+    .filter(user =>
+        user.role === "student"
+    )
+    .forEach(student => {
+
+        const li =
+            document.createElement("li");
+
+        li.innerHTML = `
+            <strong>${student.name}</strong>
+            <br>
+            ${student.email}
+        `;
+
+        studentList.appendChild(li);
+
+    });
+
+}
+
+function searchStudents() {
+
+    const keyword =
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const studentList =
+        document.getElementById("studentList");
+
+    const users =
+        getUsers();
+
+    studentList.innerHTML = "";
+
+    users
+    .filter(user =>
+        user.role === "student" &&
+        (
+            user.name
+            .toLowerCase()
+            .includes(keyword)
+
+            ||
+
+            user.email
+            .toLowerCase()
+            .includes(keyword)
+        )
+    )
+    .forEach(student => {
+
+        const li =
+            document.createElement("li");
+
+        li.innerHTML = `
+            <strong>${student.name}</strong>
+            <br>
+            ${student.email}
+        `;
+
+        studentList.appendChild(li);
+
+    });
+
+}
+
+loadStudents();
+
+</script>
+
+</body>
+</html>

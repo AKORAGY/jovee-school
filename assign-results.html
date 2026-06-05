@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assign Results</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<header>
+    <h2>Assign Results</h2>
+</header>
+
+<div class="card">
+
+    <h3>Assign Results</h3>
+
+    <label>Class</label>
+    <select
+        id="classSelect"
+        onchange="loadStudentsByClass()">
+        <option value="">Select Class</option>
+    </select>
+
+    <br><br>
+
+    <label>Student</label>
+    <select
+        id="studentSelect"
+        onchange="loadStudentAssignments()">
+        <option>Select Student</option>
+    </select>
+
+    <br><br>
+
+    <label>Assignment</label>
+    <select id="assignmentSelect">
+        <option>Select Assignment</option>
+    </select>
+
+    <br><br>
+
+    <label>Marks (%)</label>
+    <input
+        type="number"
+        id="marks"
+        min="0"
+        max="100"
+        placeholder="Enter Marks">
+
+    <br><br>
+
+    <label>Grade</label>
+    <input
+        type="text"
+        id="grade"
+        readonly>
+
+    <br><br>
+
+    <button
+        class="green"
+        onclick="assignResult()">
+        Save Result
+    </button>
+
+</div>
+
+    <br><br>
+
+   <button
+        class="blue"
+        onclick="window.location.href='teacher.html'">
+        ← Back to Dashboard
+    </button>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+loadStudentsDropdown();
+
+</script>
+
+</body>
+</html>

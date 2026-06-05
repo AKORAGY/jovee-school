@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+     <div id="loader">
+  <div class="loader-box"
+    <h2>JOVE E-SCHOOL: LOGIN</h2>
+    <div class="progress-bar">
+      <div id="progress"></div>
+    </div>
+    <p id="percent">0%</p>
+  </div>
+</div>
+
+</div>
+
+<div class="card">
+<h2>Login</h2>
+
+<form id="loginForm">
+
+    <input
+        type="email"
+        id="loginEmail"
+        placeholder="Email"
+        required
+    >
+
+    <!-- STUDENT -->
+    <input
+        type="text"
+        id="loginClass"
+        placeholder="Class (Students Only)"
+    >
+
+    <!-- TEACHER -->
+    <input
+        type="tel"
+        id="loginContact"
+        placeholder="Contact (Teachers Only)"
+    >
+
+    <div class="password-box">
+
+        <input
+            type="password"
+            id="loginCode"
+            placeholder="Security Code"
+            required
+        >
+
+        <button
+            type="button"
+            onclick="toggleLoginCode()">
+            View
+        </button>
+
+    </div>
+
+    <button
+        type="submit"
+        class="blue">
+        Login
+    </button>
+
+</form>
+  <a href="register.html" >I don't have any account</a>
+</p>
+
+<p>
+  <a href="index.html" >← back</a>
+</p>
+
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

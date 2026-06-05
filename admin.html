@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<!-- LOADER -->
+
+<div id="loader">
+    <div class="loader-box">
+        <h2>JOVE E-SCHOOL: ADMIN</h2>
+
+
+    <div class="progress-bar">
+        <div id="progress"></div>
+    </div>
+
+    <p id="percent">0%</p>
+</div>
+
+
+</div>
+
+<header>
+    <h2>Admin Dashboard</h2>
+</header>
+
+<div class="card">
+
+
+<p id="adminWelcome"></p>
+
+<h3>Admin Tools</h3>
+
+<button onclick="showTeacherPanel()">
+    Teachers
+</button>
+
+<button onclick="showStudentPanel()">
+    Students
+</button>
+
+<button onclick="showStats()">
+    View Stats
+</button>
+
+<hr>
+
+<!-- SEARCH -->
+<div id="searchSection">
+
+    <h3>🔍 Search Users</h3>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Type S for Students, T for Teachers..."
+        onkeyup="searchUser()">
+
+    <button onclick="searchUser()">
+        Search
+    </button>
+
+    <ul id="userList"></ul>
+
+</div>
+
+<!-- TEACHERS -->
+<div
+    id="teacherPanel"
+    style="display:none;">
+
+    <h3>👨‍🏫 Teachers</h3>
+
+    <ul
+        id="teacherList"
+        class="teacher-list">
+    </ul>
+
+</div>
+
+<!-- STUDENTS -->
+<div
+    id="studentPanel"
+    style="display:none;">
+
+    <h3>🎓 Students</h3>
+
+    <ul
+        id="studentList"
+        class="student-list">
+    </ul>
+
+</div>
+
+<hr>
+
+<!-- REGISTRATION CODE GENERATOR -->
+<h3>Generate Registration Code</h3>
+
+<label for="codeRole">
+    Role
+</label>
+
+<select id="codeRole">
+    <option value="student">
+        Student
+    </option>
+
+    <option value="teacher">
+        Teacher
+    </option>
+</select>
+
+<button onclick="generateCode()">
+    Generate Code
+</button>
+
+<ul id="generatedCodes"></ul>
+
+<hr>
+
+<!-- STATS -->
+<div
+    id="statsPanel"
+    style="display:none;">
+
+    <h3>System Statistics</h3>
+
+    <p id="totalUsers"></p>
+
+    <p id="totalStudents"></p>
+
+    <p id="totalTeachers"></p>
+
+    <p id="totalAdmins"></p>
+
+</div>
+
+
+</div>
+
+<!-- SETTINGS -->
+
+<section class="settings">
+
+
+<div class="settings-panel">
+
+    <button
+        class="settings-btn"
+        onclick="toggleSettings()">
+
+        ⚙️
+
+    </button>
+
+    <div
+        id="settingsDropdown"
+        class="settings-dropdown">
+
+        <button onclick="showAccount()">
+            👤 My Account
+        </button>
+
+        <button onclick="showNotifications()">
+    📥 Notifications
+    <span id="notifyCount"></span>
+</button>
+
+<button onclick="showMessages()">
+    📨 Send Message
+</button>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+
+
+</section>
+
+<!-- ACCOUNT MODAL -->
+
+<div
+    id="accountModal"
+    class="modal">
+
+
+<div class="modal-content">
+
+    <h2>My Account</h2>
+
+    <label>
+        Full Name
+    </label>
+
+    <input
+        type="text"
+        id="accountName"
+        readonly>
+
+    <label>
+        Email
+    </label>
+
+    <input
+        type="email"
+        id="accountEmail"
+        readonly>
+
+    <label>
+        Role
+    </label>
+
+    <input
+        type="text"
+        id="accountRole"
+        readonly>
+
+    <div class="account-buttons">
+
+        <button
+            id="editBtn"
+            class="blue"
+            onclick="enableEdit()">
+
+            Edit
+
+        </button>
+
+        <button
+            id="saveBtn"
+            class="green"
+            style="display:none;"
+            onclick="saveAccount()">
+
+            Save
+
+        </button>
+
+        <button
+            class="red"
+            onclick="closeAccount()">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<!-- ==========================
+LOADER
+========================== -->
+<div id="loader">
+    <div class="loader-box">
+        <h2>JOVE E-SCHOOL</h2>
+
+        <div class="progress-bar">
+            <div id="progress"></div>
+        </div>
+
+        <p id="percent">0%</p>
+    </div>
+</div>
+
+<!-- ==========================
+HEADER
+========================== -->
+<header>
+    <h2>Teacher Dashboard</h2>
+</header>
+
+<!-- ==========================
+MAIN DASHBOARD
+========================== -->
+<div class="card">
+
+    
+<h3 id="teacherWelcome">
+    Welcome Teacher
+</h3>
+
+    <!-- ==========================
+    QUICK ACTIONS
+    ========================== -->
+    <section>
+
+       <div class="dashboard-grid">
+
+          <a href="students.html" class="tool-card">
+        <h3>👨‍🎓 Students</h3>
+        <p>View student records</p>
+    </a>
+
+    <a href="manage-assignments.html" class="tool-card">
+        <h3>📚 Assignments</h3>
+        <p>Create assignments</p>
+    </a>
+
+    <a href="assign-results.html" class="tool-card">
+        <h3>📝 Assign Results</h3>
+        <p>Grade student work</p>
+    </a>
+
+    <a href="submitted-assignments.html" class="tool-card">
+        <h3>📂 Submissions</h3>
+        <p>View uploaded assignments</p>
+    </a>
+
+    <a href="marksheets.html" class="tool-card">
+        <h3>📊 Marksheets</h3>
+        <p>Manage performance</p>
+    </a>
+
+  
+<a href="videorecorder.html" class="tool-card">
+    <h3>🎥 Videos</h3>
+    <p>Record lessons</p>
+</a>
+
+</div>
+    </section>  
+
+    <hr>
+
+    <!-- ==========================
+    MANAGE STUDENTS
+    ========================== -->
+    <section>
+
+        <h3>Manage Students</h3>
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search students..."
+        >
+
+        <button onclick="searchStudents()">
+            Search
+        </button>
+
+        <ul id="studentList"></ul>
+
+    </section>
+
+    <hr>
+
+    <!-- ==========================
+    RECENT SUBMISSIONS
+    ========================== 
+    <section>
+
+        <h3>Recent Submissions</h3>
+
+        <ul id="recentAssignments">
+            <!-- JS loads submissions </section>  ===>
+
+    <hr>
+
+    <!-- ==========================
+    SETTINGS
+    ========================== -->
+    <section class="settings">
+
+        <h3>Settings</h3>
+<div class="settings-menu">
+
+    <button
+        class="settings-btn"
+        onclick="toggleSettings()">
+        ⚙️
+    </button>
+
+    <div
+        id="settingsDropdown"
+        class="settings-dropdown">
+
+        <button onclick="showAccount()">
+            👤 Account
+        </button>
+
+           <button onclick="showNotifications()">
+    📥 Notifications
+    <span id="notifyCount"></span>
+</button>
+
+<button onclick="showMessages()">
+    📨 Send Message
+</button>
+
+        <button onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+</div>
+
+    
+
+    </section>
+
+    <br>
+
+   
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+// Teacher welcome
+const teacher = getCurrentUser?.();
+
+if (teacher) {
+    document.getElementById(
+        "teacherWelcome"
+    ).textContent =
+        `Welcome, ${teacher.name}`;
+}
+
+</script>
+
+
+<div id="accountModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>My Account</h2>
+
+        <label for="accountName">Name</label>
+        <input type="text" id="accountName" placeholder="Name">
+
+        <label for="accountEmail">Email</label>
+        <input type="email" id="accountEmail" placeholder="Email">
+
+        <label for="accountRole">Role</label>
+        <input type="text" id="accountRole" readonly placeholder="Role">
+
+        <button onclick="saveAccount()">
+            Save Changes
+        </button>
+
+        <button onclick="closeAccount()">
+            Close
+        </button>
+
+         <button
+        class="red"
+        onclick="logout()">
+        Logout
+    </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marksheets</title>
+<link rel="stylesheet" href="st.css">
+
+<style>
+body {
+    font-family: Arial;
+}
+
+header {
+    text-align: center;
+    padding: 15px;
+}
+
+.card {
+    padding: 20px;
+}
+
+select {
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #f2f2f2;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h2>📊 Marksheets</h2>
+</header>
+
+<div class="card">
+
+    <!-- CLASS SELECT -->
+    <select id="classSelect" onchange="loadMarksheets()">
+        <option value="">Select Class</option>
+    </select>
+
+    <!-- TABLE -->
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>P1</th>
+                <th>P2</th>
+                <th>P3</th>
+                <th>P4</th>
+                <th>Total</th>
+                <th>Average</th>
+            </tr>
+        </thead>
+
+        <tbody id="marksheetBody"></tbody>
+    </table>
+
+    <br>
+    <button onclick="history.back()">Back</button>
+
+</div>
+
+<script src="app.js"></script>
+
+
+
+</body>
+</html>

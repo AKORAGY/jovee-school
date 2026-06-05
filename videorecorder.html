@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Record Lesson</title>
+<link rel="stylesheet" href="st.css">
+</head>
+
+<body>
+
+<header>
+    <h2>🎥 Record Lesson</h2>
+</header>
+
+<div class="card">
+
+    <select id="classSelect"></select>
+
+    <br><br>
+
+    <div id="recordStatus">🟢 Ready</div>
+    <div id="timer">00:00</div>
+
+    <video id="preview" autoplay playsinline width="300"></video>
+
+    <p>Total recordings: <span id="videoCount">0</span></p>
+
+    <br>
+
+<button onclick="startCamera()">
+    Start Camera
+</button>
+
+<button onclick="startRecording()">
+    Start Recording
+</button>
+
+<button onclick="stopRecording()">
+    Stop & Send
+</button>
+
+<br><br>
+
+<button onclick="window.location.href='class-videos.html'">
+    📂 Manage Recorded Videos
+</button>
+
+</div>
+
+<button onclick="window.location.href='teacher.html'">
+    ← Back
+</button>
+
+<script src="app.js"></script>
+
+</body>
+</html>

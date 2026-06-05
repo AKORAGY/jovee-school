@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignments</title>
+<link rel="stylesheet" href="st.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+    <div class="loader-box">
+        <h2>JOVE E-SCHOOL</h2>
+
+        <div class="progress-bar">
+            <div id="progress"></div>
+        </div>
+
+        <p id="percent">0%</p>
+    </div>
+</div>
+
+<header>
+    <h2>Student Assignments</h2>
+</header>
+
+<div class="card">
+
+    <h3>Available Assignments</h3>
+
+    <!-- Assignment cards loaded by JS -->
+    <div id="assignmentList" class="assignment-grid"></div>
+
+</div>
+
+<div class="card">
+
+    <h3>Assignment Details</h3>
+
+    <p id="assignmentDetails">
+        Select an assignment to view details.
+    </p>
+
+</div>
+
+<button class="green" onclick="back()">
+    Back
+</button>
+
+<script src="app.js"></script>
+
+</body>
+</html>
