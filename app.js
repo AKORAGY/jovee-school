@@ -521,15 +521,17 @@ function showStats() {
 
 function deleteUser(id) {
 
-    if (!confirm("Delete user?"))
+    if (!confirm("Are you sure you want to delete this user?")) {
         return;
+    }
 
-    const users =
-        getUsers().filter(
-            user => user.id !== id
-        );
+    const users = getUsers().filter(
+        user => user.id !== id
+    );
 
     saveUsers(users);
+
+    alert("User deleted successfully");
 
     loadAdminUsers();
 }
