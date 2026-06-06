@@ -247,13 +247,41 @@ function generateCode() {
     loadCodes();
 }
 
+//delete code
+function deleteCode(code) {
+
+    if (!confirm("Delete this registration code?")) {
+        return;
+    }
+
+    let codes =
+        JSON.parse(
+            localStorage.getItem("registrationCodes")
+        ) || [];
+
+    codes = codes.filter(
+        c => c.code !== code
+    );
+
+    localStorage.setItem(
+        "registrationCodes",
+        JSON.stringify(codes)
+    );
+
+    alert("Code deleted successfully");
+
+    loadCodes();
+}
+
 // load generated codes
 function loadCodes() {
 
     const list =
-        document.getElementById("generatedCodes");
+        document.getElementById(
+            "generatedCodes"
+        );
 
-    if(!list) return;
+    if (!list) return;
 
     let codes =
         JSON.parse(
@@ -261,6 +289,14 @@ function loadCodes() {
         ) || [];
 
     list.innerHTML = "";
+
+    if (codes.length === 0) {
+
+        list.innerHTML =
+            "<li>No codes available</li>";
+
+        return;
+    }
 
     codes.forEach(c => {
 
@@ -271,6 +307,12 @@ function loadCodes() {
             <strong>${c.role}</strong>
             :
             ${c.code}
+
+            <button
+                class="red"
+                onclick="deleteCode('${c.code}')">
+                Delete
+            </button>
         `;
 
         list.appendChild(li);
