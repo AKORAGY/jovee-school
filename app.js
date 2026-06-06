@@ -66,216 +66,108 @@ if(!localStorage.getItem("registrationCodes")){
 // REGISTER
 // =====================================
 
+// =====================================
+// REGISTER
+// =====================================
+
 const registerForm =
     document.getElementById("registerForm");
 
-if(registerForm){
+if (registerForm) {
 
-registerForm.addEventListener("submit", e=>{
+    registerForm.addEventListener("submit", e => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const users =
-        getUsers();
+        const users = getUsers();
 
-    const name =
-        document.getElementById("name").value.trim();
+        const name =
+            document.getElementById("name")
+            .value.trim();
 
-    const email =
-        document.getElementById("email").value.trim();
+        const email =
+            document.getElementById("email")
+            .value.trim();
 
-    const role =
-        document.getElementById("role").value;
+        const role =
+            document.getElementById("role")
+            .value;
 
-    const enteredCode =
-        document.getElementById("code")
-        .value
-        .trim()
-        .toUpperCase();
-
-    const codes =
-        JSON.parse(
-            localStorage.getItem("registrationCodes")
-        ) || [];
-
-    const validCode =
-        codes.find(c=>
-            c.code === enteredCode &&
-            c.role === role &&
-            !c.used
-        );
-
-    if(!validCode){
-
-        alert("Invalid registration code");
-        return;
-    }
-
-    const exists =
-        users.some(
-            user =>
-            user.email.toLowerCase() ===
-            email.toLowerCase()
-        );
-
-    if(exists){
-
-        alert("Email already exists");
-        return;
-    }
-
-    let newUser = {
-
-        id: Date.now(),
-
-        name,
-
-        email,
-
-        role,
-
-        code: enteredCode,
-
-        results: [],
-
-        assignments: []
-
-    };
-
-    if(role === "student"){
-
-        newUser.class =
-            document.getElementById(
-                "studentClass"
-            ).value;
-
-    }
-
-    if(role === "teacher"){
-
-        newUser.contact =
-            document.getElementById(
-                "contact"
-            ).value;
-
-    }
-
-    users.push(newUser);
-
-    validCode.used = true;
-
-    localStorage.setItem(
-        "registrationCodes",
-        JSON.stringify(codes)
-    );
-
-    saveUsers(users);
-
-    alert("Registration successful");
-
-    window.location.href =
-        "login.html";
-
-});
-
-}
-// show/hide fields based on role
-const roleSelect = document.getElementById("role");
-
-if(roleSelect){
-
-    roleSelect.addEventListener("change", () => {
-
-        const classField =
-            document.getElementById("classField");
-
-        const contactField =
-            document.getElementById("contactField");
-
-        if(roleSelect.value === "student"){
-
-            classField.style.display = "block";
-            contactField.style.display = "none";
-
-        }
-        else if(roleSelect.value === "teacher"){
-
-            classField.style.display = "none";
-            contactField.style.display = "block";
-
-        }
-        else{
-
-            classField.style.display = "none";
-            contactField.style.display = "none";
-
-        }
-
-    });
-
-}
-
-//generate registration code
-function generateCode() {
-
-    const role =
-        document.getElementById("codeRole").value;
-
-    const code =
-        role.substring(0,1).toUpperCase() +
-        Math.random()
-            .toString(36)
-            .substring(2,8)
+        const enteredCode =
+            document.getElementById("code")
+            .value
+            .trim()
             .toUpperCase();
 
-    let codes =
-        JSON.parse(
-            localStorage.getItem("registrationCodes")
-        ) || [];
+        // FIXED REGISTRATION CODES
+        const codes = {
+            student: "JOVE@ST",
+            teacher: "JOVE@TR"
+        };
 
-    codes.push({
-        role: role,
-        code: code,
-        createdAt: new Date().toLocaleString()
+        if (enteredCode !== codes[role]) {
+
+            alert("Invalid registration code");
+
+            return;
+        }
+
+        const exists = users.some(
+            user =>
+                user.email.toLowerCase() ===
+                email.toLowerCase()
+        );
+
+        if (exists) {
+
+            alert("Email already exists");
+
+            return;
+        }
+
+        let newUser = {
+
+            id: Date.now(),
+
+            name,
+
+            email,
+
+            role,
+
+            results: [],
+
+            assignments: []
+
+        };
+
+        if (role === "student") {
+
+            newUser.class =
+                document.getElementById(
+                    "studentClass"
+                ).value;
+        }
+
+        if (role === "teacher") {
+
+            newUser.contact =
+                document.getElementById(
+                    "contact"
+                ).value;
+        }
+
+        users.push(newUser);
+
+        saveUsers(users);
+
+        alert("Registration successful");
+
+        window.location.href =
+            "login.html";
+
     });
 
-    localStorage.setItem(
-        "registrationCodes",
-        JSON.stringify(codes)
-    );
-
-    loadCodes();
-}
-
-// load generated codes
-function loadCodes() {
-
-    const list =
-        document.getElementById("generatedCodes");
-
-    if(!list) return;
-
-    let codes =
-        JSON.parse(
-            localStorage.getItem("registrationCodes")
-        ) || [];
-
-    list.innerHTML = "";
-
-    codes.forEach(c => {
-
-        const li =
-            document.createElement("li");
-
-        li.innerHTML = `
-            <strong>${c.role}</strong>
-            :
-            ${c.code}
-        `;
-
-        list.appendChild(li);
-
-    });
 }
 // =====================================
 // LOGIN
@@ -284,104 +176,116 @@ function loadCodes() {
 const loginForm =
     document.getElementById("loginForm");
 
-if(loginForm){
+if (loginForm) {
 
-loginForm.addEventListener("submit", e=>{
+    loginForm.addEventListener("submit", e => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
+        const email =
+            document.getElementById("loginEmail")
+            .value.trim();
 
-    const code =
-        document.getElementById("loginCode")
-        .value
-        .trim()
-        .toUpperCase();
+        const code =
+            document.getElementById("loginCode")
+            .value.trim()
+            .toUpperCase();
 
-    const studentClass =
-        document.getElementById("loginClass")
-        .value
-        .trim();
+        const studentClass =
+            document.getElementById("loginClass")
+            .value.trim();
 
-    const contact =
-        document.getElementById("loginContact")
-        .value
-        .trim();
+        const contact =
+            document.getElementById("loginContact")
+            .value.trim();
 
-    const users =
-        getUsers();
+        const users = getUsers();
 
-    // ADMIN LOGIN
-    if(
-        email === "admin@jove.com" &&
-        code === "JOVE@123"
-    ){
+        // ADMIN LOGIN
+
+        if (
+            email === "admin@jove.com" &&
+            code === "JOVE@AD"
+        ) {
+
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify({
+                    role: "admin",
+                    name: "Administrator"
+                })
+            );
+
+            window.location.href =
+                "admin.html";
+
+            return;
+        }
+
+        let user = users.find(
+            u =>
+                u.email.toLowerCase() ===
+                email.toLowerCase()
+        );
+
+        if (!user) {
+
+            alert("User not found");
+
+            return;
+        }
+
+        const roleCodes = {
+            student: "JOVE@ST",
+            teacher: "JOVE@TR"
+        };
+
+        if (
+            code !== roleCodes[user.role]
+        ) {
+
+            alert("Invalid login code");
+
+            return;
+        }
+
+        if (
+            user.role === "student" &&
+            user.class !== studentClass
+        ) {
+
+            alert("Incorrect class");
+
+            return;
+        }
+
+        if (
+            user.role === "teacher" &&
+            user.contact !== contact
+        ) {
+
+            alert("Incorrect contact");
+
+            return;
+        }
 
         localStorage.setItem(
             "currentUser",
-            JSON.stringify({
-                role:"admin",
-                name:"Administrator"
-            })
+            JSON.stringify(user)
         );
 
-        window.location.href =
-            "admin.html";
+        if (user.role === "teacher") {
 
-        return;
-    }
+            window.location.href =
+                "teacher.html";
 
-    let user =
-        users.find(u=>
-            u.email === email &&
-            u.code === code
-        );
+        } else {
 
-    if(!user){
+            window.location.href =
+                "student.html";
+        }
 
-        alert("Invalid login details");
-        return;
-    }
-
-    if(
-        user.role === "student" &&
-        user.class !== studentClass
-    ){
-
-        alert("Incorrect class");
-        return;
-    }
-
-    if(
-        user.role === "teacher" &&
-        user.contact !== contact
-    ){
-
-        alert("Incorrect contact");
-        return;
-    }
-
-    localStorage.setItem(
-        "currentUser",
-        JSON.stringify(user)
-    );
-
-    if(user.role === "teacher"){
-
-        window.location.href =
-            "teacher.html";
-
-    }else{
-
-        window.location.href =
-            "student.html";
-
-    }
-
-});
+    });
 
 }
 // show password toggle
@@ -542,44 +446,58 @@ function loadAdminUsers() {
     const studentList =
         document.getElementById("studentList");
 
-    if (!teacherList || !studentList)
-        return;
+    if (!teacherList || !studentList) return;
 
     teacherList.innerHTML = "";
     studentList.innerHTML = "";
 
     getUsers().forEach(user => {
 
-        if(user.role === "teacher"){
+        const li = document.createElement("li");
 
-            const li =
-                document.createElement("li");
+        li.innerHTML = `
+            <strong>${user.name}</strong><br>
+            ${user.email}<br>
+            ${user.role === "student"
+                ? `Class: ${user.class || "N/A"}`
+                : `Contact: ${user.contact || "N/A"}`
+            }
+            <br><br>
 
-            li.innerHTML = `
-                <strong>${user.name}</strong><br>
-                ${user.email}
-            `;
+            <button
+                class="red"
+                onclick="deleteUser(${user.id})">
+                Delete User
+            </button>
+        `;
 
+        if (user.role === "teacher") {
             teacherList.appendChild(li);
-
         }
 
-        if(user.role === "student"){
-
-            const li =
-                document.createElement("li");
-
-            li.innerHTML = `
-                <strong>${user.name}</strong><br>
-                ${user.email}
-            `;
-
+        if (user.role === "student") {
             studentList.appendChild(li);
-
         }
 
     });
+}
+// DELETE USER
+function deleteUser(id) {
 
+    if (!confirm("Are you sure you want to delete this user?")) {
+        return;
+    }
+
+    let users = getUsers();
+
+    users = users.filter(user => user.id !== id);
+
+    saveUsers(users);
+
+    alert("User deleted successfully");
+
+    loadAdminUsers();
+    loadStats();
 }
 
 function loadStats() {
