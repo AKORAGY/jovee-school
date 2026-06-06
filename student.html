@@ -43,23 +43,35 @@
 
     </div>
 
-    <div class="card">
+ <div class="card">
 
-        <h3>📝 Upload Assignment</h3>
+    <h3>📝 Submit Assignment Answer</h3>
 
-        <label for="assignmentFile">
-            Select Assignment File
-        </label>
+    <label>Select Assignment</label>
 
-        <input
-            type="file"
-            id="assignmentFile">
+    <select id="assignmentSelect">
+        <option value="">
+            Select Assignment
+        </option>
+    </select>
 
-        <button onclick="uploadAssignment()">
-            Upload
-        </button>
+    <br><br>
 
-    </div>
+    <label>Your Answer</label>
+
+    <textarea
+        id="assignmentAnswer"
+        rows="8"
+        placeholder="Type your answer here...">
+    </textarea>
+
+    <br><br>
+
+    <button onclick="submitAnswer()">
+        Submit Answer
+    </button>
+
+</div>
 
 </section>
 
