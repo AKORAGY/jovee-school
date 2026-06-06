@@ -250,13 +250,19 @@ function generateCode() {
 //delete code
 function deleteCode(code) {
 
-    if (!confirm("Delete this registration code?")) {
+    if (
+        !confirm(
+            "Delete this registration code?"
+        )
+    ) {
         return;
     }
 
     let codes =
         JSON.parse(
-            localStorage.getItem("registrationCodes")
+            localStorage.getItem(
+                "registrationCodes"
+            )
         ) || [];
 
     codes = codes.filter(
@@ -268,11 +274,10 @@ function deleteCode(code) {
         JSON.stringify(codes)
     );
 
-    alert("Code deleted successfully");
-
     loadCodes();
-}
 
+    alert("Code deleted");
+}
 // load generated codes
 function loadCodes() {
 
@@ -285,7 +290,9 @@ function loadCodes() {
 
     let codes =
         JSON.parse(
-            localStorage.getItem("registrationCodes")
+            localStorage.getItem(
+                "registrationCodes"
+            )
         ) || [];
 
     list.innerHTML = "";
@@ -293,31 +300,42 @@ function loadCodes() {
     if (codes.length === 0) {
 
         list.innerHTML =
-            "<li>No codes available</li>";
+            "<li>No registration codes found</li>";
 
         return;
     }
 
-    codes.forEach(c => {
+    codes
+        .slice()
+        .reverse()
+        .forEach((c, index) => {
 
-        const li =
-            document.createElement("li");
+            const li =
+                document.createElement("li");
 
-        li.innerHTML = `
-            <strong>${c.role}</strong>
-            :
-            ${c.code}
+            li.innerHTML = `
 
-            <button
-                class="red"
-                onclick="deleteCode('${c.code}')">
-                Delete
-            </button>
-        `;
+                <strong>
+                    ${index + 1}.
+                </strong>
 
-        list.appendChild(li);
+                ${c.role.toUpperCase()}
+                -
+                ${c.code}
 
-    });
+                <button
+                    class="red"
+                    onclick="deleteCode('${c.code}')">
+
+                    Delete
+
+                </button>
+
+            `;
+
+            list.appendChild(li);
+
+        });
 }
 // =====================================
 // LOGIN
