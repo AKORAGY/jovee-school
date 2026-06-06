@@ -247,95 +247,35 @@ function generateCode() {
     loadCodes();
 }
 
-//delete code
-function deleteCode(code) {
-
-    if (
-        !confirm(
-            "Delete this registration code?"
-        )
-    ) {
-        return;
-    }
-
-    let codes =
-        JSON.parse(
-            localStorage.getItem(
-                "registrationCodes"
-            )
-        ) || [];
-
-    codes = codes.filter(
-        c => c.code !== code
-    );
-
-    localStorage.setItem(
-        "registrationCodes",
-        JSON.stringify(codes)
-    );
-
-    loadCodes();
-
-    alert("Code deleted");
-}
 // load generated codes
 function loadCodes() {
 
     const list =
-        document.getElementById(
-            "generatedCodes"
-        );
+        document.getElementById("generatedCodes");
 
-    if (!list) return;
+    if(!list) return;
 
     let codes =
         JSON.parse(
-            localStorage.getItem(
-                "registrationCodes"
-            )
+            localStorage.getItem("registrationCodes")
         ) || [];
 
     list.innerHTML = "";
 
-    if (codes.length === 0) {
+    codes.forEach(c => {
 
-        list.innerHTML =
-            "<li>No registration codes found</li>";
+        const li =
+            document.createElement("li");
 
-        return;
-    }
+        li.innerHTML = `
+            <strong>${c.role}</strong>
+            :
+            ${c.code}
+        `;
 
-    codes
-        .slice()
-        .reverse()
-        .forEach((c, index) => {
+        list.appendChild(li);
 
-            const li =
-                document.createElement("li");
-
-            li.innerHTML = `
-
-                <strong>
-                    ${index + 1}.
-                </strong>
-
-                ${c.role.toUpperCase()}
-                -
-                ${c.code}
-
-                <button
-                    class="red"
-                    onclick="deleteCode('${c.code}')">
-
-                    Delete
-
-                </button>
-
-            `;
-
-            list.appendChild(li);
-
-        });
+    });
 }
 // =====================================
 // LOGIN
@@ -581,17 +521,15 @@ function showStats() {
 
 function deleteUser(id) {
 
-    if (!confirm("Are you sure you want to delete this user?")) {
+    if (!confirm("Delete user?"))
         return;
-    }
 
-    const users = getUsers().filter(
-        user => user.id !== id
-    );
+    const users =
+        getUsers().filter(
+            user => user.id !== id
+        );
 
     saveUsers(users);
-
-    alert("User deleted successfully");
 
     loadAdminUsers();
 }
@@ -612,45 +550,38 @@ function loadAdminUsers() {
 
     getUsers().forEach(user => {
 
-        const li =
-            document.createElement("li");
+        if(user.role === "teacher"){
 
-        if (user.role === "teacher") {
+            const li =
+                document.createElement("li");
 
             li.innerHTML = `
                 <strong>${user.name}</strong><br>
-                ${user.email}<br><br>
-
-                <button
-                    class="red"
-                    onclick="deleteUser(${user.id})">
-                    Delete
-                </button>
+                ${user.email}
             `;
 
             teacherList.appendChild(li);
+
         }
 
-        if (user.role === "student") {
+        if(user.role === "student"){
+
+            const li =
+                document.createElement("li");
 
             li.innerHTML = `
                 <strong>${user.name}</strong><br>
-                ${user.email}<br>
-                Class: ${user.class || "N/A"}<br><br>
-
-                <button
-                    class="red"
-                    onclick="deleteUser(${user.id})">
-                    Delete
-                </button>
+                ${user.email}
             `;
 
             studentList.appendChild(li);
+
         }
 
     });
 
 }
+
 function loadStats() {
 
     const users =
